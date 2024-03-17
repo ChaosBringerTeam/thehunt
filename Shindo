@@ -1,0 +1,72 @@
+getgenv().UwU = loadstring(game:HttpGet"https://raw.githubusercontent.com/L1ZOT/Project-PJM/main/Notifycation")()
+local UIlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanman14/Test_ui/main/PJMUI"))()
+  
+getgenv().config = {
+    Eggs = false;
+    Scrolls = false;
+}
+if not game:IsLoaded() then
+    repeat wait() until game:IsLoaded()
+end
+
+local player = game:GetService("Players").LocalPlayer
+local character = player.Character or player.CharacterAdded:wait()
+local vim = game:GetService("VirtualInputManager")
+local Runservice = game:GetService("RunService")
+local cam = workspace.CurrentCamera
+local CoreGui = game:GetService("StarterGui")
+
+local function Teleport_Bypass(pos, t, skip)
+    local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(t,Enum.EasingStyle.Linear)
+ 
+    local player = game.Players.LocalPlayer
+ 
+    if player.Character and player.Character:FindFirstChild('HumanoidRootPart') then
+        local cf = pos
+        local tp = {CFrame = cf}
+        local a = tween_s:Create(player.Character.HumanoidRootPart,tweeninfo,tp)
+        a:Play()
+        if not skip then
+            a.Completed:Wait()
+        end
+    end
+ end
+ local function PressButton(Button)
+    for i,v in pairs(getconnections(Button.MouseButton1Click)) do
+        v.Function()
+    end
+end
+
+local Win = UIlib:Window("Lunar Hub", "The Hunt")
+local Main = Win:Tab("Main")
+
+spawn(function()
+    pcall(function()
+        getgenv().UwU:Notify("Thanks for using Lunar Hub!", "Script has been loaded!") --Notification example lmao
+  end)
+end)
+
+Main:Toggle("Auto eggs", false, function(t)
+    getgenv().config.Eggs = t
+end)
+
+Main:Toggle("Auto pickup scrolls", false, function(t)
+    getgenv().config.Scrolls = t
+end)
+
+
+local v1 = true;
+game.RunService.Stepped:Connect(function()
+pcall(function()
+if getgenv().config.Eggs and v1 then 
+    v1 = false;
+    for i,v in pairs(workspace.EggEvent:FindFirstChild("spawnpoints"):GetChildren()) do
+        task.spawn(function()
+            Teleport_Bypass(v.CFrame, 4, false)
+        end)
+    end    
+    v1 = true;
+    end
+end)
+end)
