@@ -1,4 +1,4 @@
-getgenv().UwU = loadstring(game:HttpGet"https://raw.githubusercontent.com/L1ZOT/Project-PJM/main/Notifycation")()
+getgenv().UwU = loadstring(game:HttpGet"https://raw.githubusercontent.com/Aidanman14/Test_ui/main/PJMNotifycation")()
 local UIlib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanman14/Test_ui/main/PJMUI"))()
   
 getgenv().config = {
